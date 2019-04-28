@@ -4,72 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center" 
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/airhorn"
-        android:layout_width="wrap_content"
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="airhorn"
-        />
+        android:gravity="center"
+        android:columnWidth="60dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="4dp" />
+
 
     <Button
-        android:id="@+id/john_cena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="john_cena"
-        />
-
-    <Button
-        android:id="@+id/leeroy_jenkins"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="leeroy_jenkins"
-        />
-
-    <Button
-        android:id="@+id/legitness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="legitness"
-        />
-
-    <Button
-        android:id="@+id/mission_failed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="mission_failed"
-        />
-
-    <Button
-        android:id="@+id/rick_astley"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="rick_astley"
-        />
-
-    <Button
-        android:id="@+id/wow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="playSound"
-        android:text="wow"
-        />
-
-    <Button
-        android:id="@+id/stop"
+        android:id="@string/stop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="stopSounds"
-        android:text="stop"
-        />
+        android:text="stop" />
 
 </LinearLayout>
