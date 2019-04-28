@@ -1,6 +1,6 @@
 package com.example.soundpoolpractice;
 
-public class Sound {
+public class Sound implements Comparable<Sound> {
     private int soundPoolId = 0;
     private String name;
 
@@ -9,6 +9,7 @@ public class Sound {
     Sound(int setSoundPoolId) {
         soundPoolId = setSoundPoolId;
     }
+
     public int getSoundPoolId() {
         return soundPoolId;
     }
@@ -23,5 +24,10 @@ public class Sound {
 
     public void setName(String setName) {
         name = setName;
+    }
+
+    @Override
+    public int compareTo(Sound other) {
+        return name.compareTo(other.getName());
     }
 }

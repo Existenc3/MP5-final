@@ -13,6 +13,7 @@ import android.widget.GridView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
     //toTest change maxStreams
     // 13-14 Seems to be the max amount that doesn't cause audioflinger errors
     private int maxStreams = 13;
-    //toTest change rate
-    private float rate = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //toTest remove later
-        assetsToSoundPoolIds();
+        assetsToSounds();
 
+        Collections.sort(sounds);
 
         GridView gridView = (GridView) findViewById(R.id.gridView);
         GridViewAdapter adapter = new GridViewAdapter(sounds, soundPool, this);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         soundPool = null;
     }
 
-    protected void assetsToSoundPoolIds() {
+    protected void assetsToSounds() {
         final AssetManager mgr = getAssets();
         try {
             String[] folders = mgr.list("");
