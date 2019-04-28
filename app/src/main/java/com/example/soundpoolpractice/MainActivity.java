@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.GridView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private SoundPool soundPool;
 
     private List<Sound> sounds = new ArrayList<>();
-    private List<Integer> soundPoolIds = new ArrayList<>();
-    private List<Integer> buttonNames = new ArrayList<>();
 
     //toTest change maxStreams
     // 13-14 Seems to be the max amount that doesn't cause audioflinger errors
@@ -51,39 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
         //toTest remove later
         assetsToSoundPoolIds();
-    }
 
-    public void playSound(View v) {
-        switch (v.getId()) {
-            case R.id.airhorn:
-                soundPool.play(sounds.get(0).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-            case R.id.john_cena:
-                soundPool.play(sounds.get(1).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-            case R.id.leeroy_jenkins:
-                soundPool.play(sounds.get(2).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-            case R.id.legitness:
-                soundPool.play(sounds.get(3).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-            case R.id.mission_failed:
-                soundPool.play(sounds.get(4).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-            case R.id.rick_astley:
-                soundPool.play(sounds.get(5).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-            case R.id.wow:
-                soundPool.play(sounds.get(6).getSoundPoolId(), 1, 1, 0, 0, rate);
-                break;
-        }
+
+        GridView gridView = (GridView) findViewById(R.id.gridView);
+        GridViewAdapter adapter = new GridViewAdapter(sounds, soundPool, this);
+        gridView.setAdapter(adapter);
     }
 
     public void stopSounds(View v) {
         soundPool.autoPause();
-        for (int id : soundPoolIds) {
-            Log.d("stopSounds","stopping id: " + id);
-        }
     }
 
     protected void onDestroy() {
