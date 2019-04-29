@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SoundPool Practice</string>
     <string name="stop">Stop</string>
+    <string name="download_files">Download Files</string>
 </resources>

@@ -59,12 +59,12 @@ public class GridViewAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     int id = lstSource.get(position).getSoundPoolId();
                     soundPool.play(id, 1, 1, 0, 0, rate);
+
                 }
             });
         } else {
             button = (Button) convertView;
         }
         return button;
-
     }
 }

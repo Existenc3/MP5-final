@@ -12,18 +12,34 @@
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:columnWidth="60dp"
+        android:gravity="center|top"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="4dp" />
 
 
-    <Button
-        android:id="@string/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="stopSounds"
-        android:text="stop" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        android:gravity="center_horizontal|top">
 
+        <Button
+            android:id="@+id/stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="stopSounds"
+            android:text="stop" />
+
+        <ImageButton
+            android:id="@+id/open_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/stop"
+            android:onClick="openFile"
+            android:src="@drawable/ic_folder_open_black_24dp"
+            android:text="Download Files" />
+
+    </RelativeLayout>
 </LinearLayout>

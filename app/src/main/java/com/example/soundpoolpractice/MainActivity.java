@@ -1,5 +1,6 @@
 package com.example.soundpoolpractice;
 
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -55,10 +56,6 @@ public class MainActivity extends AppCompatActivity {
         GridView gridView = (GridView) findViewById(R.id.gridView);
         GridViewAdapter adapter = new GridViewAdapter(sounds, soundPool, this);
         gridView.setAdapter(adapter);
-    }
-
-    public void stopSounds(View v) {
-        soundPool.autoPause();
     }
 
     protected void onDestroy() {
@@ -134,5 +131,21 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "Name not found";
+    }
+
+    public void stopSounds(View v) {
+        soundPool.autoPause();
+    }
+
+    public void openFile(View v) {
+        Log.d("openFile", "openFile start");
+        System.out.println("openFile start");
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        Log.d("openFile","Intent: " + intent.toString());
+        System.out.println("Intent: " + intent.toString());
+        startActivityForResult(intent, 42);
+        System.out.println("Intent after activity result: " + intent.toString());
     }
 }
