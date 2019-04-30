@@ -1,10 +1,12 @@
 package com.example.soundpoolpractice;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
@@ -145,10 +148,52 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("openFile start");
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/*");
+        intent.setType("audio/*");
         Log.d("openFile","Intent: " + intent.toString());
         System.out.println("Intent: " + intent.toString());
         startActivityForResult(intent, 42);
         System.out.println("Intent after activity result: " + intent.toString());
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode,
+                                 final Intent resultData) {
+
+        // If something went wrong we simply log a warning and return
+        if (resultCode != Activity.RESULT_OK) {
+            Log.d("openFile", "onActivityResult with code " + requestCode + " failed");
+            return;
+        }
+
+        Uri uri = resultData.getData();
+        File myFile = new File(uri.toString());
+        System.out.println("Absolute path: " + myFile.getAbsolutePath());
+        System.out.println("Encoded path: " + uri.getEncodedPath());
+        System.out.println("path: " + uri.getPath());
+        String path = "/content:/com.android.providers.downloads.documents/document/raw:/storage/emulated/0/Download/2sad4me.mp3";
+        int id = soundPool.load(myFile.getAbsolutePath(), 1);
+
+        soundPool.play(id, 1, 1, 0, 0, 1);
+
+
+
+//        // Otherwise we get a link to the photo either from the file browser or the camera,
+//        Uri currentPhotoURI;
+//        if (requestCode == READ_REQUEST_CODE) {
+//            currentPhotoURI = resultData.getData();
+//        } else if (requestCode == IMAGE_CAPTURE_REQUEST_CODE) {
+//            currentPhotoURI = Uri.fromFile(currentPhotoFile);
+//            photoRequestActive = false;
+//            if (canWriteToPublicStorage) {
+//                addPhotoToGallery(currentPhotoURI);
+//            }
+//        } else {
+//            Log.w(TAG, "Unhandled activityResult with code " + requestCode);
+//            return;
+//        }
+//
+//        // Now load the photo into the view
+//        Log.d(TAG, "Photo selection produced URI " + currentPhotoURI);
+//        loadPhoto(currentPhotoURI);
     }
 }
