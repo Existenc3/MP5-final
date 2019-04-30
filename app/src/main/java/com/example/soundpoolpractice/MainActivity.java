@@ -111,6 +111,9 @@ public class MainActivity extends AppCompatActivity {
                         toAdd.setName(name);
                     }
                 }
+                if (toAdd.getName() == null) {
+                    toAdd.setName("Unknown");
+                }
             }
         } catch (IOException e) {
             Log.e("List error:", "can't list assets");
