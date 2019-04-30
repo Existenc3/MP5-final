@@ -177,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        //HOW DOES THIS WORK??????
+
 //        // Otherwise we get a link to the photo either from the file browser or the camera,
 //        Uri currentPhotoURI;
 //        if (requestCode == READ_REQUEST_CODE) {
