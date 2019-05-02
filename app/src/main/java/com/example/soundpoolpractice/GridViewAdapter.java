@@ -23,9 +23,10 @@ public class GridViewAdapter extends BaseAdapter {
     private float rate = 1;
 
     public GridViewAdapter(List<Sound> setLstSource, SoundPool setSoundPool, Context setContext) {
+
         lstSource = setLstSource;
-        context = setContext;
         soundPool = setSoundPool;
+        context = setContext;
     }
 
     @Override
@@ -44,7 +45,8 @@ public class GridViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, final ViewGroup parent) {
+        System.out.println("getView called: position: " + position + " convertView: " + convertView);
         final Button button;
         if (convertView == null) {
             button = new Button(context);
@@ -59,7 +61,6 @@ public class GridViewAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     int id = lstSource.get(position).getSoundPoolId();
                     soundPool.play(id, 1, 1, 0, 0, rate);
-
                 }
             });
         } else {

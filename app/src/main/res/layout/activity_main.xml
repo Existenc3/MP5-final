@@ -26,9 +26,19 @@
         android:gravity="center_horizontal|top">
 
         <Button
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="refresh"
+            android:text="refresh"
+            />
+
+
+        <Button
             android:id="@+id/stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/refresh"
             android:onClick="stopSounds"
             android:text="stop" />
 

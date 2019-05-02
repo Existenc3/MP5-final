@@ -23,6 +23,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static GridView gridView;
+
+    private static GridViewAdapter adapter;
+
     private SoundPool soundPool;
 
     private List<Sound> sounds = new ArrayList<>();
@@ -51,12 +55,47 @@ public class MainActivity extends AppCompatActivity {
             soundPool = new SoundPool(maxStreams, AudioManager.STREAM_MUSIC, 0);
         }
 
-        //toTest remove later
         assetsToSounds();
 
         Collections.sort(sounds);
 
-        GridView gridView = (GridView) findViewById(R.id.gridView);
+        gridView = findViewById(R.id.gridView);
+        adapter = new GridViewAdapter(sounds, soundPool, this);
+        gridView.setAdapter(adapter);
+    }
+
+    public void refresh(View v) {
+        System.out.println("Refresh");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // toTest change usages.
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build();
+
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(maxStreams)
+                    .setAudioAttributes(audioAttributes)
+                    .build();
+        } else {
+            soundPool = new SoundPool(maxStreams, AudioManager.STREAM_MUSIC, 0);
+        }
+
+        // try removing this
+        //soundPool = null;
+
+        sounds.clear();
+
+        assetsToSounds();
+
+        Collections.sort(sounds);
+
+        sounds.remove(0);
+
+
+        gridView.invalidateViews();
+        //  adapter.notifyDataSetChanged();
+        //  gridView.setAdapter(adapter);
         GridViewAdapter adapter = new GridViewAdapter(sounds, soundPool, this);
         gridView.setAdapter(adapter);
     }
